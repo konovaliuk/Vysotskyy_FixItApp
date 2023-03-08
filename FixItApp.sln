@@ -10,6 +10,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{A53C6623-C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItApp.ConsoleApplication", "test\FixItApp.ConsoleApplication\FixItApp.ConsoleApplication.csproj", "{29CBA078-0210-487E-ABD4-786C89574865}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FixItApp.MVC", "src\FixItApp.MVC\FixItApp.MVC.csproj", "{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,7 @@ Global
 		{4294D1FD-6C28-4393-903E-05389DE4A515} = {3285A7C5-103E-4F7D-BC74-B622693C4062}
 		{C4C5FB75-31FB-4110-9555-5B6F745D09C4} = {3285A7C5-103E-4F7D-BC74-B622693C4062}
 		{29CBA078-0210-487E-ABD4-786C89574865} = {A53C6623-CC7D-4205-BB56-D98B78F3F149}
+		{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504} = {3285A7C5-103E-4F7D-BC74-B622693C4062}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{4294D1FD-6C28-4393-903E-05389DE4A515}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -33,5 +36,9 @@ Global
 		{29CBA078-0210-487E-ABD4-786C89574865}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CBA078-0210-487E-ABD4-786C89574865}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CBA078-0210-487E-ABD4-786C89574865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3BE1669E-E361-4EBC-AFD3-0AA7F65C3504}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

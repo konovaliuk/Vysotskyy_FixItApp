@@ -1,5 +1,26 @@
+# JetBrains
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+gen/
+build/
+dist/
+*.jar
+
+# Compiled output
+target/
 bin/
-obj/
-/packages/
-riderModule.iml
-/_ReSharper.Caches/
+classes/
+
+# Logs and databases
+log/
+*.log
+*.sqlite
+*.db
+*.h2.db
+
+# OS files
+.DS_Store
+Thumbs.db

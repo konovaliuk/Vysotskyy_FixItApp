@@ -2,18 +2,15 @@
 version: '3.8'
 
 services:
-  fixitapp-mysql-db:
+  fixItApp-mysql-db:
     image: mysql:8.0
-    container_name: fixitapp-mysql-db
+    container_name: fixItApp-mysql-db
     ports:
       - "3306:3306"
     environment:
       MYSQL_SERVER: localhost
       MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: user
-      MYSQL_PASSWORD: 123456Aa@
-      MYSQL_ROOT_HOST: '%'
-      MYSQL_DATABASE: Fixitapp
+      MYSQL_DATABASE: FixItApp
     volumes:
       - db_data:/var/lib/mysql
 

@@ -6,4 +6,18 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\FixItApp.Infrastructure\FixItApp.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.3" />
+      <PackageReference Include="MySql.Data" Version="8.0.32" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Commands" />
+    </ItemGroup>
+
 </Project>
