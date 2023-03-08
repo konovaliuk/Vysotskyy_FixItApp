@@ -16,21 +16,21 @@ public class UserRepository : IUserRepository
         return result;
     }
 
-
-    /*public async Task<List<UserEntity>> GetAllUsersAsync()
+    public async Task<List<UserEntity>> GetAllCustomersAsync(CancellationToken token)
     {
-        string command = "SELECT * FROM FixItApp.Roles;";
-        MySqlCommand query = new MySqlCommand(command, conn);
+        string str = "Customer";
+        var result =  await _dbContext.Users.FromSqlRaw(
+            $"SELECT u.* FROM FixItApp.Users as u RIGHT JOIN FixItApp.Roles AS r ON u.RoleId = r.Id WHERE r.Name LIKE '{str}'")
+            .ToListAsync(token);
+        return result;
+    }
 
-        var rdr = query.ExecuteReaderAsync();
-
-        var roles = new List<RoleEntity>();
-
-        while (rdr.)
-        {
-            roles.Add(new RoleEntity{Id = rdr.GetInt32(0), Name = rdr.GetString(1)} );
-        }
-
-        return Task<roles>;
-    }*/
+    public async Task<RoleEntity> FetchRoleByIdAsync(int id, CancellationToken token)
+    {
+        var result = await _dbContext.Roles.FromSqlRaw(
+                $"SELECT * FROM FixItApp.Roles WHERE FixItApp.Roles.Id = {id}")
+            .FirstOrDefaultAsync(token);
+        return result;
+    }
+    
 }

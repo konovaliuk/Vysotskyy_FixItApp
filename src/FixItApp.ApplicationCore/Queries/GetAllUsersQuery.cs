@@ -1,9 +1,9 @@
-using FixItApp.Infrastructure.Entities;
+using FixItApp.Infrastructure.DataTransferObjects;
 using MediatR;
 
 namespace FixItApp.ApplicationCore.Queries;
 
-public class GetAllUsersQuery : IRequest<List<UserEntity>>
+public class GetAllUsersQuery : IRequest<List<UserDTO>>
 {
     
 }

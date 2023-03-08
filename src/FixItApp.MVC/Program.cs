@@ -1,7 +1,9 @@
 using System.Reflection;
 using FixItApp.ApplicationCore;
 using FixItApp.ApplicationCore.Interfaces;
+using FixItApp.ApplicationCore.Mapping;
 using FixItApp.ApplicationCore.Repositories;
+using FixItApp.ApplicationCore.Services;
 using FixItApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +21,8 @@ builder.Services.AddFixItAppApplication();
 
 //adding Dependency injection
 builder.Services.AddScoped<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped<IMapper, Mapper>();
+builder.Services.AddScoped<IUserService, UserService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
