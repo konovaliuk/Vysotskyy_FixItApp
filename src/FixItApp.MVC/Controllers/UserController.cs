@@ -30,10 +30,12 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCustomers()
+    [Route("/UserController/GetUsers/{role}")]
+
+        public async Task<IActionResult> GetUsers(string role)
     {
-        var query = new GetAllCustomersQuery();
-        var result = new List<UserEntity>();
+        var query = new GetUsersQuery(role);
+        var result = new List<UserDTO>();
         
         try
         {

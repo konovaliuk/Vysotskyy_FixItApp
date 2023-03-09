@@ -2,7 +2,7 @@ namespace FixItApp.Infrastructure.Entities;
 
 public class UserEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     public string Name { get; set; }
 
@@ -12,7 +12,7 @@ public class UserEntity
 
     public string Password { get; set; }
 
-    public int RoleId { get; set; }
+    public string RoleId { get; set; }
 
     public RoleEntity Role;
 

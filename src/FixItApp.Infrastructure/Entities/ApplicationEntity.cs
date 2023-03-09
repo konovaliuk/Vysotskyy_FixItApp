@@ -2,7 +2,7 @@ namespace FixItApp.Infrastructure.Entities;
 
 public class ApplicationEntity
 {
-    public int Id { get; set; }
+    public string Id { get; set; }
 
     public string Title { get; set; }
 
@@ -12,11 +12,11 @@ public class ApplicationEntity
 
     public string? Status { get; set; }
 
-    public int UserId { get; set; }
+    public string UserId { get; set; }
 
     public UserEntity User { get; set; }
 
-    public int? MasterId { get; set; }
+    public string? MasterId { get; set; }
 
     public UserEntity Master { get; set; }
 

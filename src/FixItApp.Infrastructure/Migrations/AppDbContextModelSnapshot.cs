@@ -21,17 +21,17 @@ namespace FixItApp.Infrastructure.Migrations
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.ApplicationEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int?>("MasterId")
+                    b.Property<string>("MasterId")
                         .IsRequired()
-                        .HasColumnType("int");
+                        .HasColumnType("varchar(36)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(65,30)");
@@ -43,8 +43,9 @@ namespace FixItApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
@@ -58,12 +59,13 @@ namespace FixItApp.Infrastructure.Migrations
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.FeedbackEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Context")
                         .IsRequired()
@@ -78,12 +80,13 @@ namespace FixItApp.Infrastructure.Migrations
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.ItemEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
-                    b.Property<int>("ApplicationId")
-                        .HasColumnType("int");
+                    b.Property<string>("ApplicationId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -102,9 +105,9 @@ namespace FixItApp.Infrastructure.Migrations
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.RoleEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -113,13 +116,30 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Roles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "f84d91ea-2987-4651-a3fa-dad17704a59e",
+                            Name = "Customer"
+                        },
+                        new
+                        {
+                            Id = "2bf2575a-295a-40b4-8a7c-d24239df8056",
+                            Name = "Master"
+                        },
+                        new
+                        {
+                            Id = "79bc8637-916b-4080-86d0-a86dbdb19595",
+                            Name = "Manager"
+                        });
                 });
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.UserEntity", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("Id")
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Login")
                         .IsRequired()
@@ -133,8 +153,10 @@ namespace FixItApp.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleId")
+                        .IsRequired()
+                        .HasMaxLength(36)
+                        .HasColumnType("varchar(36)");
 
                     b.Property<string>("Surname")
                         .IsRequired()

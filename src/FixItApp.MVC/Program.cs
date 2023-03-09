@@ -1,4 +1,3 @@
-using System.Reflection;
 using FixItApp.ApplicationCore;
 using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.ApplicationCore.Mapping;
@@ -13,7 +12,7 @@ builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration["DBConnectionString"];
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString ,  new MySqlServerVersion(new Version(8, 0, 11)),
-        b => b.MigrationsAssembly("GameNews.Infrastructure")));
+        b => b.MigrationsAssembly("FixItApp.Infrastructure")));
 
 //adding Mediatr
 builder.Services.AddFixItAppApplication();

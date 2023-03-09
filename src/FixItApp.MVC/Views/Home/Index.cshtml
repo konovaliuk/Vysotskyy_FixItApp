@@ -7,5 +7,7 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <a asp-controller="User" asp-action="GetAllUsers"> Get All Users</a>
-    <a asp-controller="User" asp-action="GetAllCustomers"> Get All Customers</a>
+    <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Customer"> Get All Customers</a></p>
+    <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Manager"> Get All Managers</a></p>
+    <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Master"> Get All Masters</a></p>
 </div>
