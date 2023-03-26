@@ -28,11 +28,31 @@ public class AppDbContext : DbContext
                 .Property(u => u.Id)
                 .HasMaxLength(36)
                 .HasColumnType("varchar(36)");
-            
+
             modelBuilder.Entity<UserEntity>()
                 .Property(u => u.RoleId)
                 .HasMaxLength(36)
                 .HasColumnType("varchar(36)");
+            
+            modelBuilder.Entity<UserEntity>()
+                .Property(u => u.Name)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<UserEntity>()
+                .Property(u => u.Surname)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<UserEntity>()
+                .Property(u => u.Login)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<UserEntity>()
+                .Property(u => u.Password)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
 
             modelBuilder.Entity<UserEntity>()
                 .HasOne(u => u.Role)
@@ -47,11 +67,30 @@ public class AppDbContext : DbContext
                 .Property(a => a.Id)
                 .HasMaxLength(36)
                 .HasColumnType("varchar(36)");
+            
+            modelBuilder.Entity<ApplicationEntity>()
+                .Property(a => a.Title)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<ApplicationEntity>()
+                .Property(a => a.Description)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<ApplicationEntity>()
+                .Property(a => a.Status)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<ApplicationEntity>()
+                .Property(a => a.Price)
+                .HasColumnType("decimal(15,2)");
 
             modelBuilder.Entity<ApplicationEntity>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.Applications)
-                .HasForeignKey(a => a.UserId)
+                .HasForeignKey(a => a.ClientId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<ApplicationEntity>()
@@ -69,6 +108,11 @@ public class AppDbContext : DbContext
                 .HasColumnType("varchar(36)");
             
             modelBuilder.Entity<FeedbackEntity>()
+                .Property(f => f.Context)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<FeedbackEntity>()
                 .HasOne(f => f.Application)
                 .WithMany(a => a.Feedbacks)
                 .HasForeignKey(f => f.ApplicationId)
@@ -83,6 +127,16 @@ public class AppDbContext : DbContext
                 .HasColumnType("varchar(36)");
             
             modelBuilder.Entity<ItemEntity>()
+                .Property(i => i.Name)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<ItemEntity>()
+                .Property(i => i.Problem)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
+            
+            modelBuilder.Entity<ItemEntity>()
                 .HasOne(i => i.Application)
                 .WithMany(a => a.Items)
                 .HasForeignKey(i => i.ApplicationId)
@@ -95,6 +149,11 @@ public class AppDbContext : DbContext
                 .Property(r => r.Id)
                 .HasMaxLength(36)
                 .HasColumnType("varchar(36)");
+            
+            modelBuilder.Entity<RoleEntity>()
+                .Property(r => r.Name)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
 
             modelBuilder.Entity<RoleEntity>().HasData(
                 new RoleEntity { Id = Guid.NewGuid().ToString(), Name = "Customer" },

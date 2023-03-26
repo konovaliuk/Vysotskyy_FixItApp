@@ -1,7 +1,4 @@
-﻿@* @{ *@
-@*     ViewData["Title"] = "Home Page"; *@
-@* } *@
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -10,4 +7,8 @@
     <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Customer"> Get All Customers</a></p>
     <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Manager"> Get All Managers</a></p>
     <p><a asp-controller="User" asp-action="GetUsers" asp-route-role="Master"> Get All Masters</a></p>
+    <p><a asp-controller="User" asp-action="CreateUser"> Create User Test</a></p>
+    <p><a asp-controller="Application" asp-action="CreateApplication"> Create Application Test</a></p>
+    <p><a asp-controller="Application" asp-action="GetAllApplications"> Get All Applications </a></p>
+
 </div>

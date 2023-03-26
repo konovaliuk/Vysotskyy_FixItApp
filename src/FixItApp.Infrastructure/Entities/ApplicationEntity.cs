@@ -12,7 +12,7 @@ public class ApplicationEntity
 
     public string? Status { get; set; }
 
-    public string UserId { get; set; }
+    public string ClientId { get; set; }
 
     public UserEntity User { get; set; }
 

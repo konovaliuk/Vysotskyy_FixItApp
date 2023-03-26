@@ -1,3 +1,4 @@
+using System.Xml.XPath;
 using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.Infrastructure.Context;
 using FixItApp.Infrastructure.Entities;
@@ -33,4 +34,41 @@ public class UserRepository : IUserRepository
         return result;
     }
     
+    public async Task<RoleEntity> FetchRoleByNameAsync(string name, CancellationToken token)
+    {
+        var result = await _dbContext.Roles.FromSqlRaw(
+                $"SELECT * FROM FixItApp.Roles WHERE FixItApp.Roles.Name LIKE '{name}'")
+            .FirstOrDefaultAsync(token);
+        return result;
+    }
+
+    public async Task<UserEntity> CreateUserAsync(UserEntity userEntity, CancellationToken token)
+    {
+        await _dbContext.Database.ExecuteSqlRawAsync(
+              $"INSERT INTO FixItApp.Users (Id, Name, Surname, Login, Password, RoleId) " +
+              $"VALUES ('{userEntity.Id}'," +
+              $" '{userEntity.Name}', " +
+              $"'{userEntity.Surname}', " +
+              $"'{userEntity.Login}', " +
+              $"'{userEntity.Password}', " +
+              $"'{userEntity.RoleId}');", token);
+        
+        return userEntity;
+    }
+
+    public async Task<UserEntity> FetchUserByLoginAsync(string login, CancellationToken token)
+    {
+       var result = await _dbContext.Users.FromSqlRaw(
+               $"SELECT * FROM FixItApp.Users WHERE FixItApp.Users.Login LIKE '{login}'")
+            .FirstOrDefaultAsync(token);
+       return result;
+    }
+    
+    public async Task<UserEntity> FetchUserByIdAsync(string id, CancellationToken token)
+    {
+        var result = await _dbContext.Users.FromSqlRaw(
+                $"SELECT * FROM FixItApp.Users WHERE FixItApp.Users.Id = '{id}'")
+            .FirstOrDefaultAsync(token);
+        return result;
+    }
 }

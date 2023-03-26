@@ -6,15 +6,11 @@ using MediatR;
 
 namespace FixItApp.ApplicationCore.Handlers;
 
-public class GetAllUsersHandler : IRequestHandler<GetAllUsersQuery, List<UserDTO>>
+public class GetAllUsersHandler : BaseHandler, IRequestHandler<GetAllUsersQuery, List<UserDTO>>
 {
-    private readonly IUserRepository _userRepository;
-    private readonly IMapper _mapper;
-
-    public GetAllUsersHandler(IUserRepository userRepository, IMapper mapper)
+    public GetAllUsersHandler(IUserRepository userRepository, IMapper mapper) : base(userRepository, mapper)
     {
-        _userRepository = userRepository;
-        _mapper = mapper;
+        
     }
     
     public async Task<List<UserDTO>> Handle(GetAllUsersQuery request, CancellationToken token)

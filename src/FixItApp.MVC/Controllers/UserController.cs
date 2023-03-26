@@ -1,7 +1,7 @@
+using FixItApp.ApplicationCore.Commands;
 using Microsoft.AspNetCore.Mvc;
 using FixItApp.ApplicationCore.Queries;
 using FixItApp.Infrastructure.DataTransferObjects;
-using FixItApp.Infrastructure.Entities;
 using MediatR;
 
 namespace FixItApp.MVC.Controllers;
@@ -46,6 +46,32 @@ public class UserController : ControllerBase
             Console.WriteLine(ex.Message);
         }
 
+        return Ok(result);
+    }
+        
+    public async Task<IActionResult> CreateUser()
+    {
+        var userDto = new UserExtendedDTO 
+        { 
+            Name = "Oleksandr",
+            Surname = "Zinchenko",
+            Login = "zina",
+            Password = "1111",
+            Role = "Customer"
+        };
+            
+        var command = new CreateUserCommand(userDto);
+        var result = new UserDTO();
+            
+        try
+        { 
+            result = await _mediator.Send(command);
+        }
+        catch (Exception ex)
+        { 
+            Console.WriteLine(ex.Message);
+        }
+        
         return Ok(result);
     }
 }

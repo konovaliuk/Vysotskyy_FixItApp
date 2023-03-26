@@ -3,6 +3,7 @@ using System;
 using FixItApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FixItApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230317140121_SalaryBugFix")]
+    partial class SalaryBugFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,14 +28,9 @@ namespace FixItApp.Infrastructure.Migrations
                         .HasMaxLength(36)
                         .HasColumnType("varchar(36)");
 
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasColumnType("varchar(36)");
-
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("MasterId")
                         .IsRequired()
@@ -42,20 +40,22 @@ namespace FixItApp.Infrastructure.Migrations
                         .HasColumnType("decimal(15,2)");
 
                     b.Property<string>("Status")
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("varchar(36)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
-
                     b.HasIndex("MasterId")
                         .IsUnique();
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Applications");
                 });
@@ -72,8 +72,7 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.Property<string>("Context")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -94,13 +93,11 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Problem")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -117,8 +114,7 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -127,17 +123,17 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93aab2d1-22a8-4fc1-a6af-0e1d1289af23",
+                            Id = "6b7cef46-e804-4ad5-9d5a-bcb3219eb1ba",
                             Name = "Customer"
                         },
                         new
                         {
-                            Id = "5b2af939-29b1-44b6-9f03-7cc72af8c977",
+                            Id = "5a8944d9-636e-4a1b-a879-71fae3665bbc",
                             Name = "Master"
                         },
                         new
                         {
-                            Id = "278386e5-5331-443b-94bf-6e7a3ab6dae0",
+                            Id = "e4954596-88a6-499f-a948-69df85b34a55",
                             Name = "Manager"
                         });
                 });
@@ -150,18 +146,15 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.Property<string>("Login")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.Property<string>("RoleId")
                         .IsRequired()
@@ -170,8 +163,7 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.Property<string>("Surname")
                         .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                        .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
@@ -182,15 +174,15 @@ namespace FixItApp.Infrastructure.Migrations
 
             modelBuilder.Entity("FixItApp.Infrastructure.Entities.ApplicationEntity", b =>
                 {
-                    b.HasOne("FixItApp.Infrastructure.Entities.UserEntity", "User")
-                        .WithMany("Applications")
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("FixItApp.Infrastructure.Entities.UserEntity", "Master")
                         .WithOne()
                         .HasForeignKey("FixItApp.Infrastructure.Entities.ApplicationEntity", "MasterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("FixItApp.Infrastructure.Entities.UserEntity", "User")
+                        .WithMany("Applications")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
