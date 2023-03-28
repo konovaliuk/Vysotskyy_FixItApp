@@ -1,0 +1,45 @@
+@model IEnumerable<FixItApp.Infrastructure.DataTransferObjects.UserDTO>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Users</title>
+</head>
+<body>
+<div>
+   <table>
+     <thead>
+       <tr>
+         <th>Name</th>
+         <th>Surname</th>
+         <th>Login</th>
+         <th>Role</th>
+       </tr>
+     </thead>
+     <tbody>
+       @foreach(var item in Model)
+       {
+         <tr>
+           <td>@item.Name</td>
+           <td>@item.Surname</td>
+           <td>@item.Login</td>
+           <td>@item.Role</td>
+           <td>
+                <form asp-controller="User" asp-action="DeleteUser" method="post">
+                  <input type="hidden" name="id" value="@item.Id" />
+                  <button type="submit">Delete</button>
+                </form>
+           </td>
+         </tr>
+       }
+     </tbody>
+   </table>
+ 
+</div>
+</body>
+</html>

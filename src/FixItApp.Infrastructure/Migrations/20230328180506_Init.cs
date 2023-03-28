@@ -21,7 +21,7 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -36,13 +36,13 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Surname = table.Column<string>(type: "longtext", nullable: false)
+                    Surname = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Login = table.Column<string>(type: "longtext", nullable: false)
+                    Login = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Password = table.Column<string>(type: "longtext", nullable: false)
+                    Password = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     RoleId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -65,14 +65,14 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Title = table.Column<string>(type: "longtext", nullable: false)
+                    Title = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "longtext", nullable: false)
+                    Description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Price = table.Column<decimal>(type: "decimal(65,30)", nullable: true),
-                    Status = table.Column<string>(type: "longtext", nullable: true)
+                    Price = table.Column<decimal>(type: "decimal(15,2)", nullable: true),
+                    Status = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    UserId = table.Column<string>(type: "varchar(36)", nullable: false)
+                    ClientId = table.Column<string>(type: "varchar(36)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     MasterId = table.Column<string>(type: "varchar(36)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -81,14 +81,14 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     table.PrimaryKey("PK_Applications", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Applications_Users_MasterId",
-                        column: x => x.MasterId,
+                        name: "FK_Applications_Users_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Applications_Users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Applications_Users_MasterId",
+                        column: x => x.MasterId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -101,7 +101,7 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Context = table.Column<string>(type: "longtext", nullable: false)
+                    Context = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ApplicationId = table.Column<string>(type: "varchar(36)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -124,9 +124,9 @@ namespace FixItApp.Infrastructure.Migrations
                 {
                     Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Problem = table.Column<string>(type: "longtext", nullable: false)
+                    Problem = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ApplicationId = table.Column<string>(type: "varchar(36)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
@@ -148,21 +148,21 @@ namespace FixItApp.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { "2bf2575a-295a-40b4-8a7c-d24239df8056", "Master" },
-                    { "79bc8637-916b-4080-86d0-a86dbdb19595", "Manager" },
-                    { "f84d91ea-2987-4651-a3fa-dad17704a59e", "Customer" }
+                    { "2e8a6318-18e0-41c0-9c3a-7ef24a6b4984", "Customer" },
+                    { "8c221bc8-307f-47b9-896c-1eb0019e2e7f", "Manager" },
+                    { "db7ac1bc-08ed-42c5-bc6e-5eeb2a8be9bd", "Master" }
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Applications_ClientId",
+                table: "Applications",
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_MasterId",
                 table: "Applications",
                 column: "MasterId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Applications_UserId",
-                table: "Applications",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ApplicationId",

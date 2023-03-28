@@ -49,15 +49,17 @@ public class Mapper : IMapper
         };
     }
 
-    public ApplicationDTO MapAppEntityToAppDTO(ApplicationEntity entity, string clientLogin, string masterLogin)
+    public ApplicationExtendedDTO MapAppEntityToAppDTO(ApplicationEntity entity, string clientLogin, string masterLogin)
     {
-        return new ApplicationDTO
+        return new ApplicationExtendedDTO
         {
             Id = entity.Id,
             Title = entity.Title,
             Description = entity.Description,
             ClientLogin = clientLogin,
-            MasterLogin = masterLogin
+            MasterLogin = masterLogin,
+            Price =  entity.Price,
+            Status = entity.Status
         };
     }
 

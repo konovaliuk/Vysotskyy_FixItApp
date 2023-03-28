@@ -71,4 +71,10 @@ public class UserRepository : IUserRepository
             .FirstOrDefaultAsync(token);
         return result;
     }
+
+    public async Task DeleteUserByIdAsync(string id, CancellationToken token)
+    {
+        await _dbContext.Database.ExecuteSqlRawAsync(
+            $"DELETE FROM FixItApp.Users WHERE FixItApp.Users.Id = '{id}'", token);
+    }
 }

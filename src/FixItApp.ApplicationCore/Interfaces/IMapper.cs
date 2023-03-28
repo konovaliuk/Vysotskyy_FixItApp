@@ -11,5 +11,5 @@ public interface IMapper
 
     public ApplicationEntity MapAppCommandToEntity(CreateApplicationCommand command, string userId, string masterId);
 
-    public ApplicationDTO MapAppEntityToAppDTO(ApplicationEntity entity, string userLogin, string masterLogin);
+    public ApplicationExtendedDTO MapAppEntityToAppDTO(ApplicationEntity entity, string userLogin, string masterLogin);
 }

@@ -7,17 +7,17 @@ using MediatR;
 
 namespace FixItApp.ApplicationCore.Handlers;
 
-public class GetAllApplicationsHandler : BaseHandler, IRequestHandler<GetAllApplicationsQuery, List<ApplicationDTO>>
+public class GetAllApplicationsHandler : BaseHandler, IRequestHandler<GetAllApplicationsQuery, List<ApplicationExtendedDTO>>
 {
     private readonly IApplicationRepository _applicationRepository;
     
     public GetAllApplicationsHandler(IApplicationRepository applicationRepository, IUserRepository userRepository, IMapper mapper) 
         : base (userRepository, mapper) => _applicationRepository = applicationRepository;
     
-    public async Task<List<ApplicationDTO>> Handle(GetAllApplicationsQuery request, CancellationToken token)
+    public async Task<List<ApplicationExtendedDTO>> Handle(GetAllApplicationsQuery request, CancellationToken token)
     {
         List<ApplicationEntity> listAppsEntity = await _applicationRepository.GetAllApplicationsAsync(token);
-        var listAppsDto = new List<ApplicationDTO>();
+        var listAppsDto = new List<ApplicationExtendedDTO>();
         foreach (var entity in listAppsEntity)
         {
             UserEntity client = await _userRepository.FetchUserByIdAsync(entity.ClientId, token);

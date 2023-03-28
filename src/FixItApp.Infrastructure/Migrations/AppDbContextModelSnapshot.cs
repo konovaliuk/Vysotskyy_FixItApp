@@ -127,17 +127,17 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "93aab2d1-22a8-4fc1-a6af-0e1d1289af23",
+                            Id = "2e8a6318-18e0-41c0-9c3a-7ef24a6b4984",
                             Name = "Customer"
                         },
                         new
                         {
-                            Id = "5b2af939-29b1-44b6-9f03-7cc72af8c977",
+                            Id = "db7ac1bc-08ed-42c5-bc6e-5eeb2a8be9bd",
                             Name = "Master"
                         },
                         new
                         {
-                            Id = "278386e5-5331-443b-94bf-6e7a3ab6dae0",
+                            Id = "8c221bc8-307f-47b9-896c-1eb0019e2e7f",
                             Name = "Manager"
                         });
                 });

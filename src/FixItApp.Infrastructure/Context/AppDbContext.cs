@@ -90,18 +90,16 @@ public class AppDbContext : DbContext
             modelBuilder.Entity<ApplicationEntity>()
                 .HasOne(a => a.User)
                 .WithMany(u => u.Applications)
-                .HasForeignKey(a => a.ClientId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .HasForeignKey(a => a.ClientId);
 
             modelBuilder.Entity<ApplicationEntity>()
-                .HasOne(a => a.Master)
-                .WithOne()
-                .HasForeignKey<ApplicationEntity>(a => a.MasterId)
-                .OnDelete(DeleteBehavior.Cascade);
+                    .HasOne(a => a.Master)
+                    .WithOne()
+                    .HasForeignKey<ApplicationEntity>(a => a.MasterId);
 
             modelBuilder.Entity<FeedbackEntity>()
                 .HasKey(f => f.Id);
-            
+
             modelBuilder.Entity<FeedbackEntity>()
                 .Property(f => f.Id)
                 .HasMaxLength(36)

@@ -16,5 +16,6 @@ public class UserEntity
 
     public RoleEntity Role;
 
-    public IEnumerable<ApplicationEntity> Applications { get; set; }
+    public IEnumerable<ApplicationEntity> Applications{ get; set; }
+    
 }

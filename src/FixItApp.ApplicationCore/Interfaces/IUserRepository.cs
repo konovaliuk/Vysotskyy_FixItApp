@@ -15,4 +15,6 @@ public interface IUserRepository
 
     public Task<UserEntity> FetchUserByIdAsync(string id, CancellationToken token);
 
+    public Task DeleteUserByIdAsync(string Id, CancellationToken token);
+
 }

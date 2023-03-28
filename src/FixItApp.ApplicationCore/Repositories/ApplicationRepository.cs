@@ -31,4 +31,11 @@ public class ApplicationRepository : IApplicationRepository
        return result;
     }
 
+    public async Task DeleteApplicationByIdAsync(string id, CancellationToken token)
+    {
+        await _dbcontext.Database.ExecuteSqlRawAsync(
+            $"DELETE FROM FixItApp.Applications WHERE FixItApp.Applications.Id = '{id}'", token);
+    }
+
+    
 }

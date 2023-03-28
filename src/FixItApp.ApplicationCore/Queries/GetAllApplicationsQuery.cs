@@ -3,7 +3,7 @@ using MediatR;
 
 namespace FixItApp.ApplicationCore.Queries;
 
-public class GetAllApplicationsQuery : IRequest<List<ApplicationDTO>>
+public class GetAllApplicationsQuery : IRequest<List<ApplicationExtendedDTO>>
 {
     
 }

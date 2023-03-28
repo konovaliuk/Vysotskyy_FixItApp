@@ -6,12 +6,13 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FixItApp.MVC.Controllers;
 
-public class ApplicationController : ControllerBase
+[Controller]
+[Route("[controller]")]
+public class ApplicationController : Controller
 {
     private readonly IMediator _mediator;
 
     public ApplicationController(IMediator mediator) => _mediator = mediator;
-    
     
     public async Task<IActionResult> CreateApplication()
     {
@@ -19,40 +20,25 @@ public class ApplicationController : ControllerBase
         {
             Title = "Application3",
             Description = "Description3",
-            ClientLogin = "zina",
-            MasterLogin = "hammer"
+            ClientLogin = "misha",
+            MasterLogin = "checo"
         };
-
-        var command = new CreateApplicationCommand(applicationDto);
-        var result = new ApplicationDTO();
-            
-        try
-        {
-            result = await _mediator.Send(command);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-
-        return Ok(result);
+        await _mediator.Send(new CreateApplicationCommand(applicationDto));
+        return RedirectToAction("GetAllApplications");
     }
 
+    [HttpGet("GetAllApplications")]
     public async Task<IActionResult> GetAllApplications()
     {
-        var query = new GetAllApplicationsQuery();
-        var result = new List<ApplicationDTO>();
-            
-        try
-        {
-            result = await _mediator.Send(query);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
+        List<ApplicationExtendedDTO> result = await _mediator.Send(new GetAllApplicationsQuery());
+        return View("Applications", result);
+    }
 
-        return Ok(result);
+    [HttpPost]
+    public async Task<IActionResult> DeleteApplication(string id)
+    {
+        await _mediator.Send(new DeleteApplicationCommand(id));
+        return RedirectToAction("GetAllApplications");
     }
 
 }

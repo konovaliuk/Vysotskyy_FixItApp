@@ -5,73 +5,47 @@ using FixItApp.Infrastructure.DataTransferObjects;
 using MediatR;
 
 namespace FixItApp.MVC.Controllers;
-public class UserController : ControllerBase
+
+[Controller]
+[Route("[controller]")]
+public class UserController : Controller
 {
     private readonly IMediator _mediator;
 
     public UserController(IMediator mediator) => _mediator = mediator;
     
-    [HttpGet]
+    [HttpGet("GetAllUsers")]
     public async Task<IActionResult> GetAllUsers()
     {
-        var query = new GetAllUsersQuery();
-        var result = new List<UserDTO>();
-
-        try
-        {
-            result = await _mediator.Send(query);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-
-        return Ok(result);
+        List<UserDTO> result = await _mediator.Send(new GetAllUsersQuery());
+        return View("~/Views/User/Users.cshtml",result);
     }
 
-    [HttpGet]
-    [Route("/UserController/GetUsers/{role}")]
-
-        public async Task<IActionResult> GetUsers(string role)
+    [HttpGet("GetUsers/{role}")]
+    public async Task<IActionResult> GetUsers(string role)
     {
-        var query = new GetUsersQuery(role);
-        var result = new List<UserDTO>();
-        
-        try
-        {
-            result = await _mediator.Send(query);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-        }
-
-        return Ok(result);
+        List<UserDTO> result = await _mediator.Send(new GetUsersQuery(role));
+        return View("~/Views/User/Users.cshtml",result);
     }
-        
-    public async Task<IActionResult> CreateUser()
+
+    [HttpGet("CreateUser")]
+    public IActionResult CreateUser()
     {
-        var userDto = new UserExtendedDTO 
-        { 
-            Name = "Oleksandr",
-            Surname = "Zinchenko",
-            Login = "zina",
-            Password = "1111",
-            Role = "Customer"
-        };
-            
-        var command = new CreateUserCommand(userDto);
-        var result = new UserDTO();
-            
-        try
-        { 
-            result = await _mediator.Send(command);
-        }
-        catch (Exception ex)
-        { 
-            Console.WriteLine(ex.Message);
-        }
-        
-        return Ok(result);
+        return View("~/Views/User/CreateUser.cshtml",new UserExtendedDTO());
+    }   
+    
+    
+    [HttpPost]
+    public async Task<IActionResult> AddUser(UserExtendedDTO userDto)
+    {
+        await _mediator.Send(new CreateUserCommand(userDto));
+        return RedirectToAction("GetAllUsers");
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> DeleteUser(string id)
+    {
+        await _mediator.Send(new DeleteUserCommand(id));
+        return RedirectToAction("GetAllUsers");
     }
 }
