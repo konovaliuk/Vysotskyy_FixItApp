@@ -1,35 +1,82 @@
 @model FixItApp.Infrastructure.DataTransferObjects.UserExtendedDTO
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Create Users</title>
-</head>
-
 <body>
-    <div>
-        <form asp-controller="User" asp-action="AddUser" method="post">
-            <div asp-validation-summary="All">
-                <div>
-                    <input placeholder="Name" asp-for="Name"/>
+<!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Create user</h2>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <input placeholder="Surname" asp-for="Surname"/>
-                </div>
-                <div>
-                    <input placeholder="Login" asp-for="Login"/>
-                </div>
-                <div>
-                    <input placeholder="Password" type="password" asp-for="Password"/>
-                </div>
-                <div>
-                    <input placeholder="Role" asp-for="Role"/>
-                </div>
-                <button type="submit">Submit</button>
             </div>
-        </form>
-    </div>
+            <!-- Page Header End -->
+
+
+            <!-- Contact Start -->
+            <div class="contact wow fadeInUp">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="position:center" class="contact-form">
+                                <div id="success"></div>
+                                <form asp-controller="User" asp-action="AddUser"  method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                                    <div class="control-group">
+                                        <input asp-for="Name" type="text" class="form-control" placeholder="Name" required="required" data-validation-required-message="Please enter name" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input asp-for="Surname" type="text" class="form-control" placeholder="Surname" required="required" data-validation-required-message="Please enter surname" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input asp-for="Login" type="text" class="form-control" placeholder="Login" required="required" data-validation-required-message="Please enter login" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input asp-for="Password" type="password" class="form-control" placeholder="Password" required="required" data-validation-required-message="Please enter password" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input asp-for="Role" type="text" class="form-control" placeholder="Role" required="required" data-validation-required-message="Please enter role" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div>
+                                        <button class="btn" type="submit" id="sendMessageButton">Create</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact End -->
+
 </body>
+
+@* <body> *@
+@*     <div> *@
+@*         <form asp-controller="User" asp-action="AddUser" method="post"> *@
+@*             <div asp-validation-summary="All"> *@
+@*                 <div> *@
+@*                     <input placeholder="Name" asp-for="Name"/> *@
+@*                 </div> *@
+@*                 <div> *@
+@*                     <input placeholder="Surname" asp-for="Surname"/> *@
+@*                 </div> *@
+@*                 <div> *@
+@*                     <input placeholder="Login" asp-for="Login"/> *@
+@*                 </div> *@
+@*                 <div> *@
+@*                     <input placeholder="Password" type="password" asp-for="Password"/> *@
+@*                 </div> *@
+@*                 <div> *@
+@*                     <input placeholder="Role" asp-for="Role"/> *@
+@*                 </div> *@
+@*                 <button type="submit">Submit</button> *@
+@*             </div> *@
+@*         </form> *@
+@*     </div> *@
+@* </body> *@

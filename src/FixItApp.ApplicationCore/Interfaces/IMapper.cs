@@ -9,7 +9,10 @@ public interface IMapper
     public UserDTO MapUserEntityToUserDto(UserEntity user, string role);
     public UserEntity MapUserCommandToEntity(CreateUserCommand command, string roleId);
 
-    public ApplicationEntity MapAppCommandToEntity(CreateApplicationCommand command, string userId, string masterId);
+    public ApplicationEntity MapAppCommandToEntity(CreateApplicationCommand command, string userId);
 
     public ApplicationExtendedDTO MapAppEntityToAppDTO(ApplicationEntity entity, string userLogin, string masterLogin);
+
+    public ApplicationEntity MapEditAppCommandToEntity(EditApplicationCommand command, string masterId);
+
 }

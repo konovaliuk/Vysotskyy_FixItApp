@@ -92,10 +92,10 @@ public class AppDbContext : DbContext
                 .WithMany(u => u.Applications)
                 .HasForeignKey(a => a.ClientId);
 
-            modelBuilder.Entity<ApplicationEntity>()
-                    .HasOne(a => a.Master)
-                    .WithOne()
-                    .HasForeignKey<ApplicationEntity>(a => a.MasterId);
+            // modelBuilder.Entity<ApplicationEntity>()
+            //         .HasOne(a => a.Master)
+            //         .WithOne()
+            //         .HasForeignKey<ApplicationEntity>(a => a.MasterId);
 
             modelBuilder.Entity<FeedbackEntity>()
                 .HasKey(f => f.Id);

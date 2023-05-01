@@ -12,4 +12,6 @@ public class ApplicationDTO
     
     public string MasterLogin { get; set; }
 
+    public string ClientId { get; set; }
+
 }

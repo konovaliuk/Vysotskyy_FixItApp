@@ -37,15 +37,14 @@ public class Mapper : IMapper
         };
     }
 
-    public ApplicationEntity MapAppCommandToEntity(CreateApplicationCommand command, string userId, string masterId)
+    public ApplicationEntity MapAppCommandToEntity(CreateApplicationCommand command, string userId)
     {
         return new ApplicationEntity
         {
             Id = Guid.NewGuid().ToString(),
             Title = command.Title,
             Description = command.Description,
-            ClientId = userId,
-            MasterId = masterId
+            ClientId = userId
         };
     }
 
@@ -58,10 +57,21 @@ public class Mapper : IMapper
             Description = entity.Description,
             ClientLogin = clientLogin,
             MasterLogin = masterLogin,
-            Price =  entity.Price,
+            Price =  Convert.ToString(entity.Price),
             Status = entity.Status
         };
     }
 
-    
+    public ApplicationEntity MapEditAppCommandToEntity(EditApplicationCommand command, string masterId)
+    {
+        return new ApplicationEntity
+        {
+            Id = command.Id,
+            Title = command.Title,
+            Description = command.Desc,
+            Price = Convert.ToDecimal(command.Price),
+            Status = command.Status,
+            MasterId = masterId
+        };
+    }
 }

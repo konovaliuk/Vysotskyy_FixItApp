@@ -1,49 +1,81 @@
 @model IEnumerable<FixItApp.Infrastructure.DataTransferObjects.ApplicationExtendedDTO>
 
-@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title>Users</title>
-</head>
 <body>
-<div>
-    <table>
-        <thead>
-        <tr>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Client</th>
-            <th>Master</th>
-            <th>Price</th>
-            <th>Status</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach(var item in Model)
-        {
-            <tr>
-                <td>@item.Title</td>
-                <td>@item.Description</td>
-                <td>@item.ClientLogin</td>
-                <td>@item.MasterLogin</td>
-                <td>@item.Price</td>
-                <td>@item.Status</td>
-                <td>
-                    <form asp-controller="Application" asp-action="DeleteApplication" method="post">
-                        <input type="hidden" name="id" value="@item.Id" />
-                        <button type="submit">Delete</button>
-                    </form>
-                </td>
-            </tr>
-        }
-        </tbody>
-    </table>
- 
+
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Applications</h2>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Blog Start -->
+<div class="blog">
+    <div class="container">
+        <div class="row blog-page">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="blog-item">
+                        <div class="blog-title">
+                            <h3>@item.Title</h3>
+                            <form asp-controller="Application" asp-action="EditApplication" method="get" asp-route-id="@item.Id" >
+                                <input type="hidden" name="id" value="@item.Id"/>
+                                <button>ED</button>
+                            </form>
+                            
+                            <form asp-controller="Application" asp-action="DeleteApplication" >
+                                <input type="hidden" name="id" value="@item.Id"/>
+                                <button>RM</button>
+                            </form>
+                           
+                        </div>
+                        <div class="blog-meta">
+                            <p>For<a>@item.ClientLogin</a></p>
+                            @if (@item.MasterLogin != null)
+                            {
+                                <p>By<a>@item.MasterLogin</a></p>
+                            }
+                        </div>
+                        <div class="blog-text">
+                            <p>
+                                Description: @item.Description
+                            </p>
+                            @if (@item.Status != null)
+                            {
+                                <p>
+                                    Status: @item.Status
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    Status: Waiting for master
+                                </p>
+                            }
+                            @if (@item.Price != null)
+                            {
+                                <p>
+                                    Price: @item.Price
+                                </p>
+                            }
+                            else
+                            {
+                                <p>
+                                    Price: Not set yet
+                                </p>
+                                
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Blog End -->
+
 </body>
-</html>

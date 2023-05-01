@@ -1,0 +1,65 @@
+@model FixItApp.Infrastructure.DataTransferObjects.ApplicationExtendedDTO
+
+<body>
+    <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Edit an application</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+
+            <!-- Contact Start -->
+            <div class="contact wow fadeInUp">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <div id="success"></div>
+                                <form asp-controller="Application" asp-action="PutApplication" method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Title" class="form-control"  placeholder="Insert Title" required="required" data-validation-required-message="Please enter title"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <textarea style="color: #1a1e21" class="form-control" asp-for="Description" placeholder="Insert Description" required="required" data-validation-required-message="Please enter description"></textarea>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Price" class="form-control"  placeholder="Insert price" required="required" data-validation-required-message="Please enter price"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Status" class="form-control"  placeholder="Insert status" required="required" data-validation-required-message="Please enter status"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="MasterLogin" class="form-control"  placeholder="Insert master" required="required" data-validation-required-message="Please enter master"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="hidden" asp-for="ClientLogin" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="hidden" asp-for="Id" />
+                                    </div>
+                                    <div>
+                                        <button class="btn" type="submit" id="sendMessageButton">Edit</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact End -->
+
+</body>
+

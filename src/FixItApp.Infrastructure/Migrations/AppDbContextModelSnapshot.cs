@@ -35,7 +35,6 @@ namespace FixItApp.Infrastructure.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("MasterId")
-                        .IsRequired()
                         .HasColumnType("varchar(36)");
 
                     b.Property<decimal?>("Price")
@@ -54,8 +53,7 @@ namespace FixItApp.Infrastructure.Migrations
 
                     b.HasIndex("ClientId");
 
-                    b.HasIndex("MasterId")
-                        .IsUnique();
+                    b.HasIndex("MasterId");
 
                     b.ToTable("Applications");
                 });
@@ -127,17 +125,17 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2e8a6318-18e0-41c0-9c3a-7ef24a6b4984",
+                            Id = "42eaff6c-df30-4c0b-b872-7f46f2ff53c8",
                             Name = "Customer"
                         },
                         new
                         {
-                            Id = "db7ac1bc-08ed-42c5-bc6e-5eeb2a8be9bd",
+                            Id = "9b72722f-efe4-4935-b7d2-bcabc6560fac",
                             Name = "Master"
                         },
                         new
                         {
-                            Id = "8c221bc8-307f-47b9-896c-1eb0019e2e7f",
+                            Id = "48f647f4-d9c7-43e3-a21f-2ff95381c834",
                             Name = "Manager"
                         });
                 });
@@ -189,10 +187,8 @@ namespace FixItApp.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("FixItApp.Infrastructure.Entities.UserEntity", "Master")
-                        .WithOne()
-                        .HasForeignKey("FixItApp.Infrastructure.Entities.ApplicationEntity", "MasterId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany()
+                        .HasForeignKey("MasterId");
 
                     b.Navigation("Master");
 

@@ -3,21 +3,18 @@ using MediatR;
 
 namespace FixItApp.ApplicationCore.Commands;
 
-public class CreateApplicationCommand : IRequest<ApplicationDTO>
+public class CreateApplicationCommand :  IRequest
 {
-    public string Title { get; set; }
-    
-    public string Description { get; set; }
-    
-    public string ClientLogin { get; set; }
-    
-    public string MasterLogin { get; set; }
+    public string Title { get; }
+
+    public string Description { get; }
+
+    public string ClientId { get; }
 
     public CreateApplicationCommand(ApplicationDTO app)
     {
         Title = app.Title;
         Description = app.Description;
-        ClientLogin = app.ClientLogin;
-        MasterLogin = app.MasterLogin;
+        ClientId = app.ClientId;
     }
 }

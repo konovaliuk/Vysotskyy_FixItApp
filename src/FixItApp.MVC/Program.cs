@@ -5,6 +5,7 @@ using FixItApp.ApplicationCore.Repositories;
 using FixItApp.ApplicationCore.Services;
 using FixItApp.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +24,35 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IMapper, Mapper>();
 builder.Services.AddScoped<IPasswordHashing, PasswordHashing>();
+
+//adding auth
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(option =>
+    {
+        option.LoginPath = "/Access/LogIn";
+        option.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+    });
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("RequireManagerRole", policy =>
+    {
+        policy.RequireClaim("Role", "Manager");
+    });
+    
+    options.AddPolicy("RequireMasterRole", policy =>
+    {
+        policy.RequireClaim("Role", "Master");
+    });
+    
+    options.AddPolicy("RequireCustomerRole", policy =>
+    {
+        policy.RequireClaim("Role", "Customer");
+    });
+});
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -38,10 +67,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Access}/{action=LogIn}/{id?}");
 
 app.Run();

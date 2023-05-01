@@ -1,0 +1,72 @@
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model FixItApp.MVC.Models.UserLogin;
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+
+<body>
+
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Welcome </h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Start -->
+<div class="contact wow fadeInUp">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="flaticon-address"></i>
+                        <div class="contact-text">
+                            <h2>Location</h2>
+                            <p>123 Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="flaticon-call"></i>
+                        <div class="contact-text">
+                            <h2>Phone</h2>
+                            <p>+012 345 67890</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="flaticon-send-mail"></i>
+                        <div class="contact-text">
+                            <h2>Email</h2>
+                            <p>info@example.com</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="contact-form">
+                    <div id="success"></div>
+                    <form asp-controller="Access" asp-action="LogIn" method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div class="control-group">
+                            <input style="color: #1a1e21" type="text" asp-for="Login" class="form-control"  placeholder="Your Login" required="required" data-validation-required-message="Please enter your login"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                            <input style="color: #1a1e21" type="password" asp-for="Password" class="form-control"  placeholder="Your Password" required="required" data-validation-required-message="Please enter your password"/>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <label>
+                            <input type="checkbox" asp-for="LoggedIn">Keep me logged in</input>
+                        </label>
+                        <div>
+                            <button class="btn" type="submit" id="sendMessageButton">Log In</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>

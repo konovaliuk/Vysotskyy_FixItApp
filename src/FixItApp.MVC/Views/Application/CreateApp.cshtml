@@ -1,0 +1,50 @@
+@model FixItApp.Infrastructure.DataTransferObjects.ApplicationDTO
+
+<body>
+    <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Create an application</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+
+            <!-- Contact Start -->
+            <div class="contact wow fadeInUp">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <div id="success"></div>
+                                <form asp-controller="Application" asp-action="PostApplication" method="post" >
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Title" class="form-control"  placeholder="Insert Title" required="required" data-validation-required-message="Please enter title"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <textarea style="color: #1a1e21" class="form-control" asp-for="Description" placeholder="Insert Description" required="required" data-validation-required-message="Please enter description"></textarea>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                   
+                                    <div class="control-group">
+                                        <input type="hidden" asp-for="ClientId" />
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div>
+                                        <button class="btn" type="submit" id="sendMessageButton">Create</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact End -->
+
+</body>
