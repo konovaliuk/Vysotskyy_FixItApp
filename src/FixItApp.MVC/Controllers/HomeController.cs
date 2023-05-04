@@ -17,13 +17,14 @@ public class HomeController : Controller
     {
         var userPolicy = User.Claims.FirstOrDefault(c => c.Type == "Role");
         var userLogin = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+        var userId = User.Claims.FirstOrDefault(c => c.Type == "UserId");
         
         if (userPolicy.Value == "Manager")
-            return View("ManagerHome", new UserDTO{Login = userLogin.Value});
+            return View("ManagerHome", new UserDTO{Login = userLogin.Value, Id = userId.Value});
         if (userPolicy.Value == "Master")
             return View("MasterHome");
         if (userPolicy.Value == "Customer")
-            return View("CustomerHome", new UserDTO{Login = userLogin.Value});
+            return View("CustomerHome", new UserDTO{Login = userLogin.Value, Id = userId.Value});
         
         return View();
     }

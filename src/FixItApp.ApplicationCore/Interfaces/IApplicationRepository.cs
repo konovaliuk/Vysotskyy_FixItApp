@@ -15,4 +15,7 @@ public interface IApplicationRepository
 
     public Task EditApplicationAsync(ApplicationEntity applicationEntity, CancellationToken token);
 
+    public Task<List<ApplicationEntity>> GetApplicationsByClientIdAsync(string clientId,
+        CancellationToken token);
+
 }

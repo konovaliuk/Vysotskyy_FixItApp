@@ -15,7 +15,7 @@ public class EditApplicationCommand : IRequest
     
     public string? Status { get; }
     
-    public string MasterLogin { get; }
+    public string? MasterLogin { get; }
 
     public EditApplicationCommand(ApplicationExtendedDTO dto)
     {

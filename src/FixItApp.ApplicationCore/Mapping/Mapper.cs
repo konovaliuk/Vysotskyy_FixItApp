@@ -50,6 +50,11 @@ public class Mapper : IMapper
 
     public ApplicationExtendedDTO MapAppEntityToAppDTO(ApplicationEntity entity, string clientLogin, string masterLogin)
     {
+        string price = null;
+        
+        if (entity.Price != null)
+            price = Convert.ToString(entity.Price);
+        
         return new ApplicationExtendedDTO
         {
             Id = entity.Id,
@@ -57,19 +62,24 @@ public class Mapper : IMapper
             Description = entity.Description,
             ClientLogin = clientLogin,
             MasterLogin = masterLogin,
-            Price =  Convert.ToString(entity.Price),
+            Price =  price,
             Status = entity.Status
         };
     }
 
     public ApplicationEntity MapEditAppCommandToEntity(EditApplicationCommand command, string masterId)
     {
+        decimal? price = null;
+        
+        if (command.Price != null)
+            price = Convert.ToDecimal(command.Price);
+        
         return new ApplicationEntity
         {
             Id = command.Id,
             Title = command.Title,
             Description = command.Desc,
-            Price = Convert.ToDecimal(command.Price),
+            Price = price,
             Status = command.Status,
             MasterId = masterId
         };

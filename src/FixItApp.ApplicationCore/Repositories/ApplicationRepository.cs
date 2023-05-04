@@ -15,13 +15,11 @@ public class ApplicationRepository : IApplicationRepository
     public async Task<ApplicationEntity> CreateApplicationAsync(ApplicationEntity app, CancellationToken token)
     {
         await _dbcontext.Database.ExecuteSqlRawAsync(
-            $"INSERT INTO FixItApp.Applications (Id, Title, Description, ClientId, MasterId) " +
+            $"INSERT INTO FixItApp.Applications (Id, Title, Description, ClientId) " +
             $"VALUES('{app.Id}'," +
             $"'{app.Title}'," +
             $"'{app.Description}'," +
-            $"'{app.ClientId}'," +
-            $"'8bcd828c-8e3c-46ca-a863-27ff423bbc36')" , token);
-        
+            $"'{app.ClientId}')", token);
         return app;
     }
 
@@ -49,17 +47,39 @@ public class ApplicationRepository : IApplicationRepository
 
     public async Task EditApplicationAsync(ApplicationEntity applicationEntity, CancellationToken token)
     {
-        var tmp = Convert.ToDouble(applicationEntity.Price); //trouble with c sharp and sql syntx
+        // var tmp = Convert.ToDouble(applicationEntity.Price); //trouble with c sharp and sql syntx
+        //
+        // await _dbcontext.Database.ExecuteSqlRawAsync(
+        //     $"UPDATE FixItApp.Applications " +
+        //     $"SET FixItApp.Applications.Title = '{applicationEntity.Title}'," +
+        //     $"FixItApp.Applications.Description = '{applicationEntity.Description}', " +
+        //     $"FixItApp.Applications.Status = '{applicationEntity.Status}', " +
+        //     $"FixItApp.Applications.MasterId = '{applicationEntity.MasterId}', " +
+        //     $"FixItApp.Applications.Price = {tmp} " +
+        //     $"WHERE FixItApp.Applications.Id = '{applicationEntity.Id}'",
+        //     token);
+
+        var tmp = await _dbcontext.Applications.Where(x => x.Id == applicationEntity.Id)
+            .FirstOrDefaultAsync(token);
+
+        tmp.Title = applicationEntity.Title;
+        tmp.Description = applicationEntity.Description;
+        tmp.Price = applicationEntity.Price;
+        tmp.Status = applicationEntity.Status;
+        tmp.MasterId = applicationEntity.MasterId;
         
-        await _dbcontext.Database.ExecuteSqlRawAsync(
-            $"UPDATE FixItApp.Applications " +
-            $"SET FixItApp.Applications.Title = '{applicationEntity.Title}'," +
-            $"FixItApp.Applications.Description = '{applicationEntity.Description}', " +
-            $"FixItApp.Applications.Status = '{applicationEntity.Status}', " +
-            $"FixItApp.Applications.MasterId = '{applicationEntity.MasterId}', " +
-            $"FixItApp.Applications.Price = {tmp} " +
-            $"WHERE FixItApp.Applications.Id = '{applicationEntity.Id}'",
-            token);
+        _dbcontext.SaveChangesAsync(token);
+
     }
-    
+
+
+    public async Task<List<ApplicationEntity>> GetApplicationsByClientIdAsync(string clientId,
+        CancellationToken token)
+    {
+        var result = await _dbcontext.Applications.FromSqlRaw(
+            $"SELECT * FROM FixItApp.Applications WHERE FixItApp.Applications.ClientId = '{clientId}'")
+            .ToListAsync(token);
+
+        return result;
+    }
 }

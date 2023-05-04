@@ -74,7 +74,7 @@ namespace FixItApp.Infrastructure.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ClientId = table.Column<string>(type: "varchar(36)", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MasterId = table.Column<string>(type: "varchar(36)", nullable: true)
+                    MasterId = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -86,11 +86,6 @@ namespace FixItApp.Infrastructure.Migrations
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Applications_Users_MasterId",
-                        column: x => x.MasterId,
-                        principalTable: "Users",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -147,20 +142,15 @@ namespace FixItApp.Infrastructure.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { "42eaff6c-df30-4c0b-b872-7f46f2ff53c8", "Customer" },
-                    { "48f647f4-d9c7-43e3-a21f-2ff95381c834", "Manager" },
-                    { "9b72722f-efe4-4935-b7d2-bcabc6560fac", "Master" }
+                    { "88e59ab0-992d-4974-8191-a5aae47b33f9", "Manager" },
+                    { "9ec35c12-c975-4be3-aaaa-6f5f2899c42f", "Customer" },
+                    { "bf1710f5-8502-4970-8063-cf95b9681cb1", "Master" }
                 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Applications_ClientId",
                 table: "Applications",
                 column: "ClientId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Applications_MasterId",
-                table: "Applications",
-                column: "MasterId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_ApplicationId",

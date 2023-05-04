@@ -17,9 +17,7 @@ public class ApplicationEntity
     public UserEntity User { get; set; }
 
     public string? MasterId { get; set; }
-
-    public UserEntity Master { get; set; }
-
+    
     public IEnumerable<ItemEntity> Items { get; set; }
 
     public IEnumerable<FeedbackEntity> Feedbacks { get; set; }

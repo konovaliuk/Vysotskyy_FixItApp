@@ -1,3 +1,4 @@
+using System.Data;
 using System.Security.Claims;
 using FixItApp.ApplicationCore.Commands;
 using FixItApp.ApplicationCore.Queries;
@@ -25,9 +26,9 @@ public class ApplicationController : Controller
     
     [HttpPost]
     [Authorize]
-    public async Task<IActionResult> PostApplication(ApplicationDTO applicationDto)
+    public async Task<IActionResult> PostApplication(ApplicationDTO applicationDto, CancellationToken token)
     {
-        await _mediator.Send(new CreateApplicationCommand(applicationDto));
+        await _mediator.Send(new CreateApplicationCommand(applicationDto), token);
         if(User.Claims.FirstOrDefault(c => c.Type =="Role").Value == "Manager")
             return RedirectToAction("GetAllApplications");
         
@@ -36,17 +37,27 @@ public class ApplicationController : Controller
 
     [HttpGet("[controller]/GetAllApplications")]
     [Authorize(Policy = "RequireManagerRole")]
-    public async Task<IActionResult> GetAllApplications()
+    public async Task<IActionResult> GetAllApplications(CancellationToken token)
     {
-        List<ApplicationExtendedDTO> result = await _mediator.Send(new GetAllApplicationsQuery());
+        List<ApplicationExtendedDTO> result = await _mediator.Send(new GetAllApplicationsQuery(), token);
         return View("Applications", result);
+    }
+    
+    [HttpGet("[controller]/GetClientApplications")]
+    [Authorize(Policy = "RequireCustomerRole")]
+    public async Task<IActionResult> GetClientApplications(string id, CancellationToken token)
+    {
+      List<ApplicationExtendedDTO> result = await _mediator.Send(
+          new GetApplicationsByCustomerIdQuery(id), token);
+
+      return View("Applications", result);
     }
 
     [HttpPost]
     [Authorize(Policy = "RequireManagerRole")]
-    public async Task<IActionResult> DeleteApplication(string id)
+    public async Task<IActionResult> DeleteApplication(string id, CancellationToken token)
     {
-        await _mediator.Send(new DeleteApplicationCommand(id));
+        await _mediator.Send(new DeleteApplicationCommand(id), token);
         return RedirectToAction("GetAllApplications");
     }
 
@@ -62,7 +73,15 @@ public class ApplicationController : Controller
     [Authorize(Policy = "RequireManagerRole")]
     public async Task<IActionResult> PutApplication(ApplicationExtendedDTO appDto, CancellationToken token)
     {
-        await _mediator.Send(new EditApplicationCommand(appDto), token);
+        try
+        {
+            await _mediator.Send(new EditApplicationCommand(appDto), token);
+        }
+        catch (DataException)
+        {
+            return RedirectToAction("GetMasters","User");
+        }
+        
         return RedirectToAction("GetAllApplications");
     }
 }

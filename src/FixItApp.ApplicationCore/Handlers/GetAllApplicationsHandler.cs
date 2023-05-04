@@ -21,7 +21,10 @@ public class GetAllApplicationsHandler : BaseHandler, IRequestHandler<GetAllAppl
         foreach (var entity in listAppsEntity)
         {
             UserEntity client = await _userRepository.FetchUserByIdAsync(entity.ClientId, token);
-            UserEntity master = await _userRepository.FetchUserByIdAsync(entity.MasterId, token);
+            
+            var master = new UserEntity();
+            if(entity.MasterId != null)
+                master = await _userRepository.FetchUserByIdAsync(entity.MasterId, token);
             
             listAppsDto.Add(_mapper.MapAppEntityToAppDTO(entity, client.Login, master.Login));
         }

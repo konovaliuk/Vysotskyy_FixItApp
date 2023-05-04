@@ -1,6 +1,7 @@
 using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.ApplicationCore.Queries;
 using FixItApp.Infrastructure.DataTransferObjects;
+using FixItApp.Infrastructure.Entities;
 using MediatR;
 
 namespace FixItApp.ApplicationCore.Handlers;
@@ -20,7 +21,10 @@ public class GetApplicationByIdHandler : BaseHandler, IRequestHandler<GetApplica
             request.Id, cancellationToken);
 
         var customerEntity = await _userRepository.FetchUserByIdAsync(appEntity.ClientId, cancellationToken);
-        var masterEntity =  await _userRepository.FetchUserByIdAsync(appEntity.MasterId, cancellationToken);
+
+        var masterEntity = new UserEntity();
+        if(appEntity.MasterId != null)
+            masterEntity =  await _userRepository.FetchUserByIdAsync(appEntity.MasterId, cancellationToken);
 
         var result = _mapper.MapAppEntityToAppDTO(appEntity,
             customerEntity.Login, masterEntity.Login);

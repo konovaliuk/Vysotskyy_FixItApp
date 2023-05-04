@@ -82,7 +82,7 @@ public class AppDbContext : DbContext
                 .Property(a => a.Status)
                 .HasMaxLength(255)
                 .HasColumnType("varchar(255)");
-            
+
             modelBuilder.Entity<ApplicationEntity>()
                 .Property(a => a.Price)
                 .HasColumnType("decimal(15,2)");
@@ -91,11 +91,11 @@ public class AppDbContext : DbContext
                 .HasOne(a => a.User)
                 .WithMany(u => u.Applications)
                 .HasForeignKey(a => a.ClientId);
-
-            // modelBuilder.Entity<ApplicationEntity>()
-            //         .HasOne(a => a.Master)
-            //         .WithOne()
-            //         .HasForeignKey<ApplicationEntity>(a => a.MasterId);
+            
+            modelBuilder.Entity<ApplicationEntity>()
+                .Property(a => a.MasterId)
+                .HasMaxLength(255)
+                .HasColumnType("varchar(255)");
 
             modelBuilder.Entity<FeedbackEntity>()
                 .HasKey(f => f.Id);

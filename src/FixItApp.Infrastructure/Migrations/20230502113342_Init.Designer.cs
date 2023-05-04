@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FixItApp.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20230501174042_Init")]
+    [Migration("20230502113342_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -38,7 +38,8 @@ namespace FixItApp.Infrastructure.Migrations
                         .HasColumnType("varchar(255)");
 
                     b.Property<string>("MasterId")
-                        .HasColumnType("varchar(36)");
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.Property<decimal?>("Price")
                         .HasColumnType("decimal(15,2)");
@@ -55,8 +56,6 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ClientId");
-
-                    b.HasIndex("MasterId");
 
                     b.ToTable("Applications");
                 });
@@ -128,17 +127,17 @@ namespace FixItApp.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "42eaff6c-df30-4c0b-b872-7f46f2ff53c8",
+                            Id = "9ec35c12-c975-4be3-aaaa-6f5f2899c42f",
                             Name = "Customer"
                         },
                         new
                         {
-                            Id = "9b72722f-efe4-4935-b7d2-bcabc6560fac",
+                            Id = "bf1710f5-8502-4970-8063-cf95b9681cb1",
                             Name = "Master"
                         },
                         new
                         {
-                            Id = "48f647f4-d9c7-43e3-a21f-2ff95381c834",
+                            Id = "88e59ab0-992d-4974-8191-a5aae47b33f9",
                             Name = "Manager"
                         });
                 });
@@ -188,12 +187,6 @@ namespace FixItApp.Infrastructure.Migrations
                         .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("FixItApp.Infrastructure.Entities.UserEntity", "Master")
-                        .WithMany()
-                        .HasForeignKey("MasterId");
-
-                    b.Navigation("Master");
 
                     b.Navigation("User");
                 });
