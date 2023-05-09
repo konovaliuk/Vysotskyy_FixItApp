@@ -1,6 +1,7 @@
 using System.Xml.XPath;
 using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.Infrastructure.Context;
+using FixItApp.Infrastructure.DataTransferObjects;
 using FixItApp.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -77,4 +78,18 @@ public class UserRepository : IUserRepository
         await _dbContext.Database.ExecuteSqlRawAsync(
             $"DELETE FROM FixItApp.Users WHERE FixItApp.Users.Id = '{id}'", token);
     }
+
+    public async Task<List<UserEntity>> GetCustomersByMasterIdAsync(string id, CancellationToken token)
+    {
+        var result = await  _dbContext.Users.FromSqlRaw(
+            $"SELECT u.Id, u.Name, u.Surname, u.Login, u.Password, u.RoleId " +
+            $"FROM FixItApp.Roles r " +
+            $"INNER JOIN FixItApp.Users u ON u.RoleId = r.Id " +
+            $"INNER JOIN FixItApp.Applications a ON u.Id = a.ClientId " +
+            $"WHERE a.MasterId = '{id}' AND r.Name = 'Customer'")
+            .ToListAsync(token);
+
+        return result;
+    }
+
 }

@@ -15,6 +15,7 @@ public interface IUserRepository
 
     public Task<UserEntity> FetchUserByIdAsync(string id, CancellationToken token);
 
-    public Task DeleteUserByIdAsync(string Id, CancellationToken token);
+    public Task DeleteUserByIdAsync(string id, CancellationToken token);
 
+    public Task<List<UserEntity>> GetCustomersByMasterIdAsync(string id, CancellationToken token);
 }

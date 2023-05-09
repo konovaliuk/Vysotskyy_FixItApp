@@ -68,4 +68,12 @@ public class UserController : Controller
         await _mediator.Send(new DeleteUserCommand(id));
         return RedirectToAction("GetAllUsers");
     }
+
+    [HttpGet("[controller]/GetCustomersOfMaster/")]
+    [Authorize(Policy = "RequireMasterRole")]
+    public async Task<IActionResult> GetCustomersOfMaster(string id, CancellationToken token)
+    {
+        var result = await _mediator.Send(new GetCustomersByMasterIdQuery(id), token);
+        return View("Users", result);
+    }
 }

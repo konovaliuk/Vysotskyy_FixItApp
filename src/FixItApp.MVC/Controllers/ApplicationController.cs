@@ -43,7 +43,7 @@ public class ApplicationController : Controller
         return View("Applications", result);
     }
     
-    [HttpGet("[controller]/GetClientApplications")]
+    [HttpGet("[controller]/GetClientApplications/")]
     [Authorize(Policy = "RequireCustomerRole")]
     public async Task<IActionResult> GetClientApplications(string id, CancellationToken token)
     {
@@ -51,6 +51,25 @@ public class ApplicationController : Controller
           new GetApplicationsByCustomerIdQuery(id), token);
 
       return View("Applications", result);
+    }
+    
+    [HttpGet("[controller]/GetMasterApplications/")]
+    [Authorize(Policy = "RequireMasterRole")]
+    public async Task<IActionResult> GetMasterApplications(string id, CancellationToken token)
+    {
+        var result = new List<ApplicationExtendedDTO>();
+        try
+        {
+             result = await _mediator.Send(
+                new GetApplicationsByMasterIdQuery(id), token);
+        }
+        catch (DataException e)
+        {
+           Console.WriteLine(e.Message);
+        }
+        
+        return View("Applications", result);
+
     }
 
     [HttpPost]

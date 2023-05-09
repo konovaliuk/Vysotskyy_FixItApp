@@ -94,8 +94,9 @@
 
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav mr-auto">
-                                <a href="" class="nav-item nav-link">Home</a>
+                                <a asp-controller="Home" asp-action="Index" class="nav-item nav-link">Home</a>
                                 <a href="" class="nav-item nav-link">Project</a>
+                                <a asp-controller="Feedback" asp-action="GetAllFeedBacks" class="nav-item nav-link active">Feedbacks</a>
                                 <div class="nav-item dropdown">
                                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Team</a>
                                     <div class="dropdown-menu">

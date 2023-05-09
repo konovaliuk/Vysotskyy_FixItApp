@@ -15,4 +15,8 @@ public interface IMapper
 
     public ApplicationEntity MapEditAppCommandToEntity(EditApplicationCommand command, string masterId);
 
+    public FeedbackEntity MapCreateFeedBackCommandToEntity(CreateFeedBackCommand command);
+
+    public FeedbackDTO MapFeedbackEntityToDTO(FeedbackEntity entity, string applicationTitle, string masterLogin);
+
 }

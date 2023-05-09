@@ -18,4 +18,9 @@ public interface IApplicationRepository
     public Task<List<ApplicationEntity>> GetApplicationsByClientIdAsync(string clientId,
         CancellationToken token);
 
+    public Task<List<ApplicationEntity>> GetApplicationsByMasterIdAsync(string masterId,
+        CancellationToken token);
+
+    public Task UpdateAppOnMasterDelete(string masterId, CancellationToken token);
+
 }

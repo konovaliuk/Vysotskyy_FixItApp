@@ -22,6 +22,7 @@ builder.Services.AddFixItAppApplication();
 //adding Dependency injection
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
 builder.Services.AddScoped<IMapper, Mapper>();
 builder.Services.AddScoped<IPasswordHashing, PasswordHashing>();
 

@@ -9,7 +9,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h2>Welcome </h2>
+                <h2>Welcome</h2>
             </div>
         </div>
     </div>
@@ -48,17 +48,15 @@
                 <div class="contact-form">
                     <div id="success"></div>
                     <form asp-controller="Access" asp-action="LogIn" method="post" name="sentMessage" id="contactForm" novalidate="novalidate">
+                         <div asp-validation-summary="All" class="text-danger"></div>
                         <div class="control-group">
-                            <input style="color: #1a1e21" type="text" asp-for="Login" class="form-control"  placeholder="Your Login" required="required" data-validation-required-message="Please enter your login"/>
+                            <input style="color: #1a1e21" type="text" asp-for="Login" class="form-control" placeholder="Your Login" required="required" data-validation-required-message="Please enter your login"/>
                             <p class="help-block text-danger"></p>
                         </div>
                         <div class="control-group">
-                            <input style="color: #1a1e21" type="password" asp-for="Password" class="form-control"  placeholder="Your Password" required="required" data-validation-required-message="Please enter your password"/>
+                            <input style="color: #1a1e21" type="password" asp-for="Password" class="form-control" placeholder="Your Password" required="required" data-validation-required-message="Please enter your password"/>
                             <p class="help-block text-danger"></p>
                         </div>
-                        <label>
-                            <input type="checkbox" asp-for="LoggedIn">Keep me logged in</input>
-                        </label>
                         <div>
                             <button class="btn" type="submit" id="sendMessageButton">Log In</button>
                         </div>

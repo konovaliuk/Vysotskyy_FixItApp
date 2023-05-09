@@ -2,7 +2,6 @@ using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.Infrastructure.Context;
 using FixItApp.Infrastructure.Entities;
 using Microsoft.EntityFrameworkCore;
-using MySql.Data.Types;
 
 namespace FixItApp.ApplicationCore.Repositories;
 
@@ -81,5 +80,32 @@ public class ApplicationRepository : IApplicationRepository
             .ToListAsync(token);
 
         return result;
+    }
+
+    public async Task<List<ApplicationEntity>> GetApplicationsByMasterIdAsync(string masterId,
+        CancellationToken token)
+    {
+        var result = await _dbcontext.Applications.FromSqlRaw(
+                $"SELECT * FROM FixItApp.Applications WHERE FixItApp.Applications.MasterId = '{masterId}'")
+            .ToListAsync(token);
+        
+        return result;
+    }
+
+    public async Task UpdateAppOnMasterDelete(string masterId, CancellationToken token)
+    {
+        // await _dbcontext.Database.ExecuteSqlRawAsync(
+        //     $"UPDATE FixItApp.Applications" +
+        //     $"SET FixItApp.Applications.MasterId = '{null}'" +
+        //     $"WHERE FixItApp.Applications.MasterId = '{masterId}'", token);
+
+        var applicationEntities = await _dbcontext.Applications
+            .Where(a => a.MasterId == masterId)
+            .ToListAsync(token);
+
+        foreach (var app in applicationEntities)
+            app.MasterId = null;
+
+        _dbcontext.SaveChangesAsync(token);
     }
 }

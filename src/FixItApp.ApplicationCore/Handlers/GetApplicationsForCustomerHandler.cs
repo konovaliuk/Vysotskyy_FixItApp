@@ -2,6 +2,7 @@ using System.Data;
 using FixItApp.ApplicationCore.Interfaces;
 using FixItApp.ApplicationCore.Queries;
 using FixItApp.Infrastructure.DataTransferObjects;
+using FixItApp.Infrastructure.Entities;
 using MediatR;
 
 namespace FixItApp.ApplicationCore.Handlers;
@@ -17,25 +18,27 @@ public class GetApplicationsForCustomerHandler : BaseHandler, IRequestHandler<Ge
     public async Task<List<ApplicationExtendedDTO>> Handle(GetApplicationsByCustomerIdQuery request,
         CancellationToken cancellationToken)
     {
-        var clientEntity = await _userRepository.FetchUserByIdAsync(request.Id, cancellationToken);
-        if (clientEntity != null)
+        var customerEntity = await _userRepository.FetchUserByIdAsync(request.Id, cancellationToken);
+        if (customerEntity != null)
         {
-            var applicationEntities =
+            var appList = new List<ApplicationExtendedDTO>();
+            var appEntities =
                 await _applicationRepository.GetApplicationsByClientIdAsync(request.Id, cancellationToken);
 
-            var listDTO = new List<ApplicationExtendedDTO>();
-
-            foreach (var entity in applicationEntities)
+            foreach (var item in appEntities)
             {
-                var master = await _userRepository.FetchUserByIdAsync(entity.MasterId,
-                    cancellationToken);
-                listDTO.Add(_mapper.MapAppEntityToAppDTO(entity, clientEntity.Login,
-                    master.Login));
+                var masterEntity = new UserEntity();
+                
+                if(item.MasterId != null)
+                    masterEntity = await _userRepository.FetchUserByIdAsync(item.MasterId, cancellationToken);
+                
+                var appDto = _mapper.MapAppEntityToAppDTO(item, customerEntity.Login, masterEntity.Login);
+                appList.Add(appDto);
             }
-
-            return listDTO;
+            
+            return appList;
         }
-        
+
         throw new DataException();
     }
 }

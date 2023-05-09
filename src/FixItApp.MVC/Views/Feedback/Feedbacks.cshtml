@@ -1,0 +1,51 @@
+@model IEnumerable<FixItApp.Infrastructure.DataTransferObjects.FeedbackDTO>
+
+<body>
+<div>
+
+    <div class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2>Feedbacks</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <div class="portfolio">
+    <div class="container">
+        <div class="row portfolio-container">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-4 col-md-6 col-sm-12 portfolio-item first wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="portfolio-warp">
+                        <div class="portfolio-img">
+                            <img src="~/img/service-5.jpg" alt="Image">
+                            <div class="portfolio-overlay">
+                                <p>
+                                    Application: @item.ApplicationTitle <br>
+                                    @item.Context
+                                </p>
+                            </div>
+                        </div>
+                        <div class="portfolio-text">
+                            @if (item.MasterLogin != null)
+                            {
+                                <h3>By @item.MasterLogin</h3>
+                            }
+                            else
+                            {
+                                <h3>Master not set</h3>
+                            }
+                            <a class="btn" href="~/img/service-5.jpg" data-lightbox="portfolio">+</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+</div>
+</body>

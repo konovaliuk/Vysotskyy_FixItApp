@@ -1,5 +1,21 @@
 @model IEnumerable<FixItApp.Infrastructure.DataTransferObjects.ApplicationExtendedDTO>
 
+<style>
+.buttn {
+  display: inline-block;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+</style>
+
 <body>
 
 <div class="page-header">
@@ -44,7 +60,7 @@
                                 <p><a>Waiting for master</a></p>
                             }
                         </div>
-                        <div class="blog-text">
+                        <div style="height:110%" class="blog-text">
                             <p>
                                 Description: @item.Description
                             </p>
@@ -73,8 +89,11 @@
                                 </p>
                                 
                             }
+                          
+                                <a style="float:right" class="buttn" asp-controller="Feedback" asp-action="CreateFeedback" asp-route-appId="@item.Id" method="get">Comment</a>
                         </div>
-                    </div>
+                        
+                        </div>
                 </div>
             }
         </div>

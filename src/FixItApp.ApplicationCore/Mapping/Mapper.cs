@@ -50,11 +50,6 @@ public class Mapper : IMapper
 
     public ApplicationExtendedDTO MapAppEntityToAppDTO(ApplicationEntity entity, string clientLogin, string masterLogin)
     {
-        string price = null;
-        
-        if (entity.Price != null)
-            price = Convert.ToString(entity.Price);
-        
         return new ApplicationExtendedDTO
         {
             Id = entity.Id,
@@ -62,7 +57,7 @@ public class Mapper : IMapper
             Description = entity.Description,
             ClientLogin = clientLogin,
             MasterLogin = masterLogin,
-            Price =  price,
+            Price =  Convert.ToString(entity.Price),
             Status = entity.Status
         };
     }
@@ -82,6 +77,27 @@ public class Mapper : IMapper
             Price = price,
             Status = command.Status,
             MasterId = masterId
+        };
+    }
+
+    public FeedbackEntity MapCreateFeedBackCommandToEntity(CreateFeedBackCommand command)
+    {
+        return new FeedbackEntity
+        {
+            Id = Guid.NewGuid().ToString(),
+            Context = command.Context,
+            ApplicationId = command.AppId
+        };
+    }
+
+    public FeedbackDTO MapFeedbackEntityToDTO(FeedbackEntity entity, string applicationTitle, string masterLogin)
+    {
+        return new FeedbackDTO
+        {
+            Id = entity.Id,
+            Context = entity.Context,
+            MasterLogin = masterLogin,
+            ApplicationTitle = applicationTitle
         };
     }
 }

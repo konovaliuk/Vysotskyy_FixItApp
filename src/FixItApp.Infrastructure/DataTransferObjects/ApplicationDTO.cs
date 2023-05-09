@@ -10,7 +10,7 @@ public class ApplicationDTO
     
     public string ClientLogin { get; set; }
     
-    public string MasterLogin { get; set; }
+    public string? MasterLogin { get; set; }
 
     public string ClientId { get; set; }
 

@@ -1,46 +1,62 @@
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model FixItApp.Infrastructure.DataTransferObjects.UserDTO
 <!DOCTYPE html>
 <html lang="en">
 
 <body>
-        <div class="feature wow fadeInUp" data-wow-delay="0.1s">
-            <div class="container-fluid">
-                <div class="row align-items-center">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="flaticon-worker"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>View all masters</h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasus nec pretim ornare velit non</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="flaticon-building"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>View all applications</h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasus nec pretim ornare velit non</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-12">
-                        <div class="feature-item">
-                            <div class="feature-icon">
-                                <i class="flaticon-call"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h3>24/7 Support</h3>
-                                <p>Lorem ipsum dolor sit amet elit. Phasus nec pretim ornare velit non</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Welcome back, @Model.Login </h2>
             </div>
         </div>
-                <!-- Feature End-->
+    </div>
+</div>
+
+
+<div style="margin-top: 10px">
+    <div class="feature wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <a asp-controller="Application" asp-action="GetMasterApplications" asp-route-id="@Model.Id" class="col-lg-4 col-md-12">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="flaticon-building"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>View my applications</h3>
+                            <p>Applications and their info. Work with customers.</p>
+                        </div>
+                    </div>
+                </a>
+                <a asp-controller="User" asp-action="GetCustomersOfMaster" asp-route-id="@Model.Id" class="col-lg-4 col-md-12">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <i class="flaticon-call"></i>
+                        </div>
+                        <div class="feature-text">
+                            <h3>View my customers</h3>
+                            <p>Customers and their data.</p>
+                        </div>
+                    </div>
+                </a>
+                <a asp-controller="User" asp-action="GetCustomers" class="col-lg-4 col-md-12">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            @* <i class="flaticon-call"></i> *@
+                        </div>
+                        <div class="feature-text">
+                            <h3>View my feedbacks</h3>
+                            <p>Coming soon</p>
+                        </div>
+                    </div>
+                </a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 </body>

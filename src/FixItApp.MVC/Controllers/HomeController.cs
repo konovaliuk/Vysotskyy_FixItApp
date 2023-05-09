@@ -22,7 +22,7 @@ public class HomeController : Controller
         if (userPolicy.Value == "Manager")
             return View("ManagerHome", new UserDTO{Login = userLogin.Value, Id = userId.Value});
         if (userPolicy.Value == "Master")
-            return View("MasterHome");
+            return View("MasterHome", new UserDTO{Login = userLogin.Value, Id = userId.Value});
         if (userPolicy.Value == "Customer")
             return View("CustomerHome", new UserDTO{Login = userLogin.Value, Id = userId.Value});
         
