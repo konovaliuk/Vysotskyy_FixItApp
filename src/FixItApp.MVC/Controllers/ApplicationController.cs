@@ -43,7 +43,7 @@ public class ApplicationController : Controller
         return View("Applications", result);
     }
     
-    [HttpGet("[controller]/GetClientApplications/")]
+    [HttpGet("[controller]/GetClientApplications/{id}")]
     [Authorize(Policy = "RequireCustomerRole")]
     public async Task<IActionResult> GetClientApplications(string id, CancellationToken token)
     {
@@ -53,7 +53,7 @@ public class ApplicationController : Controller
       return View("Applications", result);
     }
     
-    [HttpGet("[controller]/GetMasterApplications/")]
+    [HttpGet("[controller]/GetMasterApplications/{id}")]
     [Authorize(Policy = "RequireMasterRole")]
     public async Task<IActionResult> GetMasterApplications(string id, CancellationToken token)
     {
@@ -80,7 +80,7 @@ public class ApplicationController : Controller
         return RedirectToAction("GetAllApplications");
     }
 
-    [HttpGet("[controller]/EditApplication/")] //??????
+    [HttpGet("[controller]/EditApplication/{id}")] //??????
     [Authorize(Policy = "RequireManagerRole")]
     public async Task<IActionResult> EditApplication(string id, CancellationToken token)
     {

@@ -23,6 +23,7 @@ builder.Services.AddFixItAppApplication();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IFeedbackRepository, FeedbackRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<IMapper, Mapper>();
 builder.Services.AddScoped<IPasswordHashing, PasswordHashing>();
 

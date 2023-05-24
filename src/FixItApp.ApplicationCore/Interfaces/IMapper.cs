@@ -19,4 +19,7 @@ public interface IMapper
 
     public FeedbackDTO MapFeedbackEntityToDTO(FeedbackEntity entity, string applicationTitle, string masterLogin);
 
+    public ItemDTO MapItemEntityToDTO(ItemEntity entity);
+
+    public ItemEntity MapCreateItemCommandToEntity(CreateItemCommand command);
 }

@@ -1,0 +1,71 @@
+@model IEnumerable<FixItApp.Infrastructure.DataTransferObjects.ItemDTO>
+
+<style>
+.btn-custom {
+    height: 60px; /* Adjust the height as desired */
+    line-height: 60px; /* Ensure vertical alignment within the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+</style>
+
+
+<body>
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Items</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="faqs">
+    <div class="container">
+        <div class="row">
+            
+            @if (@Model.FirstOrDefault().Name != null)
+            {
+                <div class="col-md-6">
+                    <div id="accordion-1">
+                        @foreach (var item in Model)
+                        {
+                            <div class="card wow fadeInLeft" data-wow-delay="0.1s">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <a class="card-link collapsed" data-toggle="collapse" href="#collapse-@item.Id">
+                                        @item.Name
+                                    </a>
+                                    <form asp-controller="Item" asp-action="DeleteItem" asp-route-id="@item.Id" method="post">
+                                        <input type="hidden" name="id" value="@item.Id"/>
+                                        <button class="btn btn-danger btn-custom" type="submit">
+                                            <span class="btn-text">RM</span>
+                                        </button>
+                                    </form>
+                                </div>
+                                <div id="collapse-@item.Id" class="collapse" data-parent="#accordion-1">
+                                    <div class="card-body">
+                                        @item.Problem
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+
+            <a asp-controller="Item" asp-action="CreateItem" asp-route-applicationId="@Model.FirstOrDefault().ApplicationId" class="btn btn-primary btn-lg" style="height:25%; background-color: black; border: 2px solid black; position: relative;
+                                                                                                                                                                                                                                   left: 50px;">Create new item</a>
+
+        </div>
+    </div>
+</div>
+</body>

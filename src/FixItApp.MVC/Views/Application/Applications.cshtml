@@ -88,9 +88,11 @@
                                     Price: Not set yet
                                 </p>
                                 
-                            }
-                          
-                                <a style="float:right" class="buttn" asp-controller="Feedback" asp-action="CreateFeedback" asp-route-appId="@item.Id" method="get">Comment</a>
+                            }   
+                            
+                            <a style="float:left" class="buttn" asp-controller="Item" asp-action="GetItemsApplication"asp-route-id="@item.Id" method="get">View items</a>
+
+                            <a style="float:right" class="buttn" asp-controller="Feedback" asp-action="CreateFeedback" asp-route-appId="@item.Id" method="get">Comment</a>
                         </div>
                         
                         </div>

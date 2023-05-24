@@ -100,4 +100,26 @@ public class Mapper : IMapper
             ApplicationTitle = applicationTitle
         };
     }
+
+    public ItemDTO MapItemEntityToDTO(ItemEntity entity)
+    {
+        return new ItemDTO
+        {
+            Id = entity.Id,
+            Name = entity.Name,
+            Problem = entity.Problem,
+            ApplicationId = entity.ApplicationId
+        };
+    }
+
+    public ItemEntity MapCreateItemCommandToEntity(CreateItemCommand command)
+    {
+        return new ItemEntity
+        {
+            Id = Guid.NewGuid().ToString(),
+            Name = command.Name,
+            Problem = command.Problem,
+            ApplicationId = command.ApplicationId
+        };
+    }
 }

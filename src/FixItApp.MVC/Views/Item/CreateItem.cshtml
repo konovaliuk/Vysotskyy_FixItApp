@@ -1,0 +1,47 @@
+@model FixItApp.Infrastructure.DataTransferObjects.ItemDTO
+<body>
+    <!-- Page Header Start -->
+            <div class="page-header">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2>Create an item</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Page Header End -->
+
+
+            <!-- Contact Start -->
+            <div class="contact wow fadeInUp">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="contact-form">
+                                <div id="success"></div>
+                                <form asp-controller="Item" asp-action="AddItem" method="post" >
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Name" class="form-control"  placeholder="Insert item" required="required" data-validation-required-message="Please enter title"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input style="color: #1a1e21" type="text" asp-for="Problem" class="form-control"  placeholder="Insert problem" required="required" data-validation-required-message="Please enter title"/>
+                                        <p class="help-block text-danger"></p>
+                                    </div>
+                                    <div class="control-group">
+                                        <input type="hidden" asp-for="ApplicationId" />
+                                    </div>
+                                    <div>
+                                        <button class="btn" type="submit" id="sendMessageButton">Create</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Contact End -->
+
+</body>
